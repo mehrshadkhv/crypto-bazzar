@@ -22,16 +22,36 @@ class _UserProfileScreenState extends State<CoinListScreen> {
     return Scaffold(
       body: SafeArea(
         child: ListView.builder(
-          itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.red,
-              height: 150,
-              child: Center(
-                child: Text(
-                  cryptoList![index].name,
-                  style: TextStyle(fontSize: 30),
-                ),
+          itemBuilder: (context, index) => ListTile(
+            title: Text(cryptoList![index].name),
+            subtitle: Text(cryptoList![index].symbol),
+            leading: SizedBox(
+              width: 30.0,
+              child: Center(child: Text(cryptoList![index].rank.toString())),
+            ),
+            trailing: SizedBox(
+              width: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(cryptoList![index].priceUsd.toStringAsFixed(2)),
+                      Text(
+                        cryptoList![index].changePercent24hr.toStringAsFixed(2),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 30.0,
+                    child: Center(
+                      child: _getIconChangePercent(
+                        cryptoList![index].changePercent24hr,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -39,5 +59,11 @@ class _UserProfileScreenState extends State<CoinListScreen> {
         ),
       ),
     );
+  }
+
+  Widget _getIconChangePercent(double percentChange) {
+    return percentChange <= 0
+        ? Icon(Icons.trending_down, size: 24, color: Colors.red)
+        : Icon(Icons.trending_up, size: 24, color: Colors.green);
   }
 }
