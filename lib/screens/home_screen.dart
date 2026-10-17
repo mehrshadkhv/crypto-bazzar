@@ -24,8 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[800],
       body: SafeArea(
-        child: Center(
-          child: SpinKitSpinningLines(color: Colors.white, size: 80.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: AssetImage('assets/images/logo.png')),
+            SizedBox(height: 50.0),
+            SpinKitWave(color: Colors.white, size: 30.0),
+          ],
         ),
       ),
     );
@@ -33,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getData() async {
     var response = await Dio().get(
-      'https://rest.coincap.io/v3/assets?apiKey=0884ceb7c980a3462b5979657feb49716d15bcc499a7df38491ad7fdeacf0b55',
+      'https://rest.coincap.io/v3/assets?apiKey=b3300f24b85279a26c13a5b47947b08ea7723666754a0c72535f61086b6ae7c9',
     );
     List<dynamic> jsonList = response.data['data'];
     List<Crypto> cryptoList = jsonList
