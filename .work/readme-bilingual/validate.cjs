@@ -11,7 +11,8 @@ for (const name of ['README.md', 'README.fa.md']) {
   if (!fs.existsSync(file)) { failures.push(`${name}: missing`); continue; }
   const text = fs.readFileSync(file, 'utf8');
   if (!text.includes('[English](README.md) | [فارسی](README.fa.md)')) failures.push(`${name}: missing switcher`);
-  if (!text.includes('License-not%20specified')) failures.push(`${name}: license badge incorrect`);
+  if (!text.includes('License-MIT-green') || !text.includes('](LICENSE)')) failures.push(`${name}: MIT license badge or link missing`);
+  if (text.includes('License-not%20specified') || text.includes('No `LICENSE` file is included') || text.includes('فایل `LICENSE` وجود ندارد')) failures.push(`${name}: outdated license text`);
   if (text.includes('\uFFFD')) failures.push(`${name}: replacement character`);
   if (!text.includes('changePercent24Hr')) failures.push(`${name}: missing API key name`);
   let stack = [], inFence = false, current = [], blocks = [], prose = [];

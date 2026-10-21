@@ -4,7 +4,7 @@
 
 ![Flutter](https://img.shields.io/badge/Flutter-SDK-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.12%2B-0175C2?logo=dart&logoColor=white)
-![License: not specified](https://img.shields.io/badge/License-not%20specified-lightgrey)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 A small Flutter app for browsing cryptocurrency prices in a dark interface, with Persian labels, name search, and pull-to-refresh.
 
@@ -175,4 +175,4 @@ Other limitations worth knowing when extending the app:
 
 ## License
 
-No `LICENSE` file is included in this checkout. The badge reflects that status; this README does not assign a license. Add a license file if you intend to specify terms for reuse or distribution.
+This project is licensed under the [MIT License](LICENSE).

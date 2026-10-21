@@ -6,7 +6,7 @@
 
 ![Flutter](https://img.shields.io/badge/Flutter-SDK-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.12%2B-0175C2?logo=dart&logoColor=white)
-![مجوز مشخص نشده](https://img.shields.io/badge/License-not%20specified-lightgrey)
+[![مجوز MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 یک اپ کوچک Flutter برای دیدن قیمت ارزهای دیجیتال، با ظاهر تیره، برچسب‌های فارسی، جست‌وجوی نام ارز و تازه‌سازی با کشیدن لیست به پایین.
 
@@ -216,6 +216,6 @@ flutter test
 
 ## مجوز استفاده
 
-در این نسخه از مخزن فایل `LICENSE` وجود ندارد. نشان مجوز همین وضعیت را نشان می‌دهد و این README مجوزی به پروژه اضافه نمی‌کند. اگر می‌خواهید شرایط استفاده مجدد یا توزیع را مشخص کنید، یک فایل مجوز به مخزن اضافه کنید.
+این پروژه تحت [مجوز MIT](LICENSE) منتشر شده است.
 
 </div>
