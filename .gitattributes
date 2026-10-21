@@ -1,0 +1,16 @@
+# Keep handwritten Dart as the primary source for GitHub language statistics.
+# Exclude platform-specific runners and web scaffolding.
+android/** linguist-vendored
+ios/** linguist-vendored
+web/** linguist-vendored
+windows/** linguist-vendored
+linux/** linguist-vendored
+macos/** linguist-vendored
+
+# Exclude bundled assets, including fonts, images, and screenshots.
+assets/** linguist-vendored
+
+# Exclude generated Dart files at any directory depth.
+*.g.dart linguist-generated=true
+*.freezed.dart linguist-generated=true
+*.mocks.dart linguist-generated=true
