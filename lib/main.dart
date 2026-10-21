@@ -1,4 +1,4 @@
-import 'package:crypto_bazzar/screens/home_screen.dart';
+import 'package:crypto_bazzar/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,6 +15,6 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen());
   }
 }

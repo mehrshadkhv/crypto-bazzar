@@ -4,14 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SplashScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getData() async {
     var response = await Dio().get(
-      'https://rest.coincap.io/v3/assets?apiKey=b3300f24b85279a26c13a5b47947b08ea7723666754a0c72535f61086b6ae7c9',
+      'API key',//Put your CoinCap API here
     );
     List<dynamic> jsonList = response.data['data'];
     List<Crypto> cryptoList = jsonList

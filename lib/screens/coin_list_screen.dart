@@ -12,6 +12,7 @@ class CoinListScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<CoinListScreen> {
   List<Crypto>? cryptoList;
+  bool isSearchLoadingVisible = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,20 +34,59 @@ class _UserProfileScreenState extends State<CoinListScreen> {
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
-        child: RefreshIndicator(
-          color: greenColor,
-          backgroundColor: greyColor,
-          onRefresh: () async {
-           List<Crypto> freshData = await _getData();
-           setState(() {
-             cryptoList = freshData;
-           });
-          },
-          child: ListView.builder(
-            itemBuilder: (context, index) =>
-                _getListTileItem(cryptoList![index]),
-            itemCount: cryptoList!.length,
-          ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: TextField(
+                  onChanged: (Value) {
+                    _filterList(Value);
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'اسم رمزارز معتبر را سرچ کنید',
+                    hintStyle: TextStyle(fontFamily: 'mr', color: Colors.white),
+                    hintTextDirection: TextDirection.rtl,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                    ),
+                    filled: true,
+                    fillColor: greenColor,
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: isSearchLoadingVisible,
+              child: Text(
+                '...در حال آپدیت اطلاعات رمزارز ها',
+                style: TextStyle(
+                  color: greenColor,
+                  fontFamily: 'mr',
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
+            Expanded(
+              child: RefreshIndicator(
+                color: greyColor,
+                backgroundColor: greenColor,
+                onRefresh: () async {
+                  List<Crypto> freshData = await _getData();
+                  setState(() {
+                    cryptoList = freshData;
+                  });
+                },
+                child: ListView.builder(
+                  itemBuilder: (context, index) =>
+                      _getListTileItem(cryptoList![index]),
+                  itemCount: cryptoList!.length,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -110,12 +150,37 @@ class _UserProfileScreenState extends State<CoinListScreen> {
 
   Future<List<Crypto>> _getData() async {
     var response = await Dio().get(
-      'https://rest.coincap.io/v3/assets?apiKey=b3300f24b85279a26c13a5b47947b08ea7723666754a0c72535f61086b6ae7c9',
+      'API Key', //Put your CoinCap API here
     );
     List<dynamic> jsonList = response.data['data'];
     List<Crypto> cryptoList = jsonList
         .map<Crypto>((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
         .toList();
     return cryptoList;
+  }
+
+  Future<void> _filterList(String enteredKeyword) async {
+    List<Crypto> cryptoResultList = [];
+    if (enteredKeyword.isEmpty) {
+      setState(() {
+        isSearchLoadingVisible = true;
+      });
+      var result = await _getData();
+      setState(() {
+        cryptoList = result;
+        isSearchLoadingVisible = false;
+      });
+      return;
+    }
+
+    cryptoResultList = cryptoList!
+        .where(
+          (element) =>
+              element.name.toLowerCase().contains(enteredKeyword.toLowerCase()),
+        )
+        .toList();
+    setState(() {
+      cryptoList = cryptoResultList;
+    });
   }
 }
